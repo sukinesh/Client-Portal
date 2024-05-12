@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Portal</title>
+    <link rel="icon" type="image/x-icon" href="images/kettlebell.png">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script type="text/javascript">
+        
+
+         // Functions to switch Data tabs
+        function Package()
+        {
+            document.getElementById("measurement").style.display = "none";
+            document.getElementById("pr_track").style.display = "none";
+            document.getElementById("package").style.display = "block";
+        };
+        function Measure()
+        {
+            document.getElementById("measurement").style.display = "block";
+            document.getElementById("pr_track").style.display = "none";
+            document.getElementById("package").style.display = "none";
+        };
+        function Pr_track()
+        {
+            document.getElementById("measurement").style.display = "none";
+            document.getElementById("pr_track").style.display = "block";
+            document.getElementById("package").style.display = "none";
+        };
+
+// Form Opening & Closing & Submitting functions 
+         function openMesForm()
+        {
+            document.getElementById("mes_form").style.display = "flex";
+            document.getElementById("form_blurbg").style.display = "block";
+        }
+        function openPRForm()
+        {
+            document.getElementById("pr_form").style.display = "flex";
+            document.getElementById("form_blurbg").style.display = "block";
+        }
+        function closeDialog() {
+        document.getElementById("pr_form").style.display = "none";
+        document.getElementById("mes_form").style.display = "none";
+        document.getElementById("form_blurbg").style.display = "none";
+        }
+
+       
+
+    </script>
+</head>
+    
+<body>
+    
+  <!-- Dashboard page -->
+    <div class="dashboard">
+
+        <div class="main-nav" style="padding-left: 0px; padding-right: 0px;">
+            <img src="images/Logo.png" width="200px" height="150px">
+            <br><br>
+            <nav>
+            <ul>
+                <li><button class ="nav_button" onclick="Package()"><nobr><img class="menu_img" src= "images/package.png"  ><b style="padding-left: 7px;">    Package</b> </nobr></button></li>
+                <li><button class ="nav_button" onclick="Measure()"><nobr><img class="menu_img" src=  "images/measurement.png"><b style="padding-left: 7px;">    Measurement </b></nobr></button></li>
+                <li><button class ="nav_button" onclick="Pr_track()"><nobr><img class="menu_img" src= "images/LiftingPR.png" ><b style="padding-left: 7px;">    Powerlifting PR</b></nobr></button></li>
+            </ul>
+            </nav>
+        </div>
+
+        <div class="greet">
+            <table>
+            <td><img src="images/profile_female.png" class="profile"></td>
+            <td><h2 class="clientname">Hi <b id="clientname">-----</b></h2> </td>
+            </table>
+        </div>
+
+        <div class="attend" style="display: inline;" >
+           
+                  <div id="piechart" style="margin-left: auto; margin-right: auto;"></div>
+                  <div id="progres_bar"  style="margin-left: auto; margin-right: auto;">This Month Attendance<br><progress id="attendprogres" value="12" max="31"> 32% </progress></div>
+            
+        </div>
+
+        <div class="data" >
+            <div id="package">
+                <h2 style="text-align: center;">Package</h2>
+                <table style="width: 100%;">
+                    <tr><td style="width:70%" >Package</td><td class="yellow_button" id="package_data">-------</td></tr>
+                    <tr><td >Start Date</td><td class="yellow_button" id="startdate">dd MMM yyyy</td></tr>
+                    <tr><td >End Date</td><td class="yellow_button" id="enddate">dd MMM yyyy</td></tr>
+                </table>
+                <div class="data_button_pannel">
+                    
+                    <button id="renew_button" class="loginbutton" disabled ><b>Renew</b></button>
+                    
+                    
+                </div>
+            </div>
+            <div id="measurement">
+                <h2 style="text-align: center; margin-bottom: 10px;">Measurement</h2>
+                <table style="width: 100%;">
+                    <tr><td style="width:70%" >Weight</td><td class="yellow_button" id="weight">00</td><td>Kg</td></tr>
+                    <tr><td >Chest</td><td class="yellow_button" id="chest">00</td><td>In</td></tr>
+                    <tr><td >Hip</td><td class="yellow_button" id="hip">00</td><td>In</td></tr>
+                    <tr><td >Waist</td><td class="yellow_button" id="waist">00</td><td>In</td></tr>
+                    
+                </table>
+                <p id="mes_date" style="margin: auto; margin-top: 5px;
+                text-align: center; color:black">-- -- --</p>
+                <p id="mes_no_data" style="visibility: hidden; text-align: center; margin:auto">You Dont have any data</p>
+                
+                <div class="data_button_pannel">
+                    <button id="mes_prev_button" class="arrow"><</button>
+                    <button id="mes_form_button" class="loginbutton" onclick="openMesForm()"><b>Update</b></button>
+                    <button id="mes_next_button" class="arrow">></button>
+                </div>
+            </div>
+            <div id="pr_track">
+                <h2 style="text-align: center;">Lifting PR</h2>
+                <table style="width: 100%;">
+                    <tr><td style="width:70%">Squat</td><td class="yellow_button" id="squat">00</td><td>Kg</td></tr>
+                    <tr><td>Bench Press</td><td class="yellow_button" id="benchpress">00</td><td>Kg</td></tr>
+                    <tr><td>Deadlift</td><td class="yellow_button" id="deadlift">00</td><td>Kg</td></tr>
+                </table>
+                <p id="pr_date" style="margin: auto; margin-top: 5px;
+                text-align: center; color:black">-- -- --</p>
+                <p id="pr_no_data" style="visibility: hidden;text-align: center; margin: auto;">You Dont have any data</p>
+                
+                <div class="data_button_pannel">
+                    <button id="pr_prev_button" class="arrow"><</button>
+                    <button id="pr_form_button" class="loginbutton" onclick="openPRForm()"><b>Update</b></button>
+                    <button id="pr_next_button" class="arrow">></button>
+                </div>
+            </div>
+        </div> 
+
+        <table class="assign">
+            <tr>
+                <td >
+                    <div class="yellow_button">Coach</div> <br>
+                        <b id="coach">-----</b>
+                </td>
+                <td class="coach" >
+                    <img src="images/profile_male.png" class="profile" >
+                </td>
+            </tr>
+            <tr>
+                <td>            
+                    <div class="yellow_button">Dietetian</div><br>
+                    <b id="dietetian">-----</b>
+                </td>
+                    <td class="coach" >
+                        <img src="images/profile_female.png" class="profile" >
+                    </td>
+            </tr>
+        </table>
+        
+    </div>
+    
+    <!-- Login Page starts here -->
+    <div id="loginpage">
+        <div id="bg_img"></div>
+        <div id = "overlay" class="blurbg"> 
+            <form id="login_form" >
+                <div id="logo_container" style="  width: 150px;height: 150px;border-radius: 50%; justify-content: center;background-color: rgba(255, 255, 255, 0.5);display: flex;align-items: center;" >
+                <img src="images/Logo.png" width="200px" height="150px"  />
+                </div>
+                <h1>EDIT Hybrid - Client Portal</h1>
+                <br><br><br><br>
+                <input class="formInput" type="text" id="username" placeholder="Name" /><br>
+                <input class="formInput" type="number" id="mobile_no" placeholder="Mobile No" /><br>
+                <input type="submit" class="loginbutton" value="Login"><br>
+              
+                <p id="error_banner" ></p>
+            </form>
+            
+        </div>
+    </div>
+
+    <!-- Loading image -->
+
+    <div id="loader">
+		<img  src="images/Weightplate.png" />
+	  </div>
+
+    <!--  Measurement Update Form-->  
+    <div id="form_blurbg" class = blurbg>
+    <form id="mes_form"  >
+        <span id="closeBtn" onclick="closeDialog()">&times;</span>
+        <h2 style="width: 100%;">New Measurement Form</h2><br>
+        <input class="formInput" id="weightinput" type="number" placeholder="weight" required>
+        <input class="formInput" id="chestinput" type="number" placeholder="Chest" required>
+        <input class="formInput" id="waistinput" type="number" placeholder="waist" required>
+        <input class="formInput" id="hipinput" type="number" placeholder="hip" required>
+        
+        <input class="loginbutton" type="submit" value="Update">
+
+    </form>
+    <form id="pr_form"  >
+        <span id="closeBtn" onclick="closeDialog()">&times;</span>
+        <h2 style="width: 100%;">New Lifting PR Form</h2><br>
+        <input class="formInput" id="squatinput" type="number" placeholder="Squat" required>
+        <input class="formInput" id="benchinput" type="number" placeholder="Bench" required>
+        <input class="formInput" id="deadliftinput" type="number" placeholder="Deadlift" required>
+       
+        
+        <input class="loginbutton" type="submit" value="Update">
+    </div>
+
+    </form>
+
+   
+      <script type="module">
+        //---------------IMPORTING FIREBASE & FIRESTORE-----------------------------
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDBGZUyH3nGp7ueFaFEj6fTyivZbRDorgo",
+          authDomain: "appscript-db-test.firebaseapp.com",
+          projectId: "appscript-db-test",
+          storageBucket: "appscript-db-test.appspot.com",
+          messagingSenderId: "265777379777",
+          appId: "1:265777379777:web:1b0a9bfb67b463cfb69740"
+        };
+      
+        // Initialize Firebase
+        const firebase = initializeApp(firebaseConfig);
+
+        import {getFirestore, doc, getDoc, getDocs, setDoc, collection, addDoc,updateDoc, query , where } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+
+        const firestore = getFirestore(firebase);
+
+        //----------------------------------------------------------------------------
+        
+        //Global Variable
+        var clientID, mes_data_pos = 1, pr_data_pos =1, mes_array=[],pr_array=[];
+        
+	
+	    document.getElementById("loader").style.display = "none";
+        document.getElementById("mes_form").style.display = "none";
+        document.getElementById("pr_form").style.display = "none";
+        document.getElementById("form_blurbg").style.display = "none";
+
+        document.body.style.overflow = "hidden";
+
+        var present_days = 0;
+        document.getElementById("attendprogres").value = present_days;
+
+        login_form.addEventListener('submit', login_pressed);
+        pr_form.addEventListener('submit',prFormSubmit);
+        mes_form.addEventListener('submit',mesFormSubmit);
+        mes_prev_button.addEventListener('click',function()
+            {
+            mes_data_pos = mes_data_pos -1 ; console.log(mes_data_pos)
+            DisplayMes();
+        });
+        mes_next_button.addEventListener('click',function()
+            {
+            mes_data_pos = mes_data_pos + 1 ; console.log(mes_data_pos)
+            DisplayMes();
+        });
+        pr_prev_button.addEventListener('click',function()
+            {
+            pr_data_pos = pr_data_pos -1 ; console.log(pr_data_pos)
+            DisplayPR();
+        });
+        pr_next_button.addEventListener('click',function()
+            {
+            pr_data_pos = pr_data_pos + 1 ; console.log(pr_data_pos)
+            DisplayPR();
+        });
+
+
+        //document.getElementById("mes_form_button").addEventListener("click",openMesForm());
+        
+
+//----------TESTING PURPOSE---------------
+
+        
+        
+        //login_pressed();
+
+
+
+
+        
+
+//----------------------------------------------------
+
+
+
+        //Login function
+        
+        async function login_pressed(event)
+        { event.preventDefault(); 
+        
+          
+          var username = document.getElementById("username").value;
+          clientID =  document.getElementById("mobile_no").value;
+          
+          console.log(clientID);
+          if(username == "" || clientID == "")
+          {
+            document.getElementById("error_banner").innerHTML="Its not Leg day, Dont skip anything";
+          }
+          else if(!((/^\d{10}$/.test(clientID)) && (/^[a-zA-Z][a-zA-Z\s]*$/.test(username) ) ) )
+          {
+            document.getElementById("error_banner").innerHTML="Not a Valid Input";            
+          }
+          else 
+          {
+          
+            // --------------CHECK DATABASE FOR CLIENT ID----------------------------
+
+
+                const clientSnap = await getDoc(doc(firestore,"ClientBio",clientID));
+                //console.log(clientSnap.data());
+
+                if(clientSnap.exists() && clientSnap.data().name.toUpperCase() == username.toUpperCase())
+                {
+                    //document.getElementById("error_banner").innerHTML="Naama Jeichutom MAAAARAAAAA";
+                    pullData();
+                    document.getElementById("loader").style.display = "block";
+                    document.getElementById("loader").style.zIndex = 4 ;
+                }
+                else
+                  {
+                  document.getElementById("error_banner").innerHTML="Your data doesnt exist ";
+                  }       
+           
+          }
+          
+        }
+
+   
+      async function pullData()
+        { 
+           mes_array = [];pr_array=[];
+          var mes_query = query (collection(firestore,"Measurement"),where("clientId","==",+clientID));
+          var pr_query  = query (collection(firestore,"LiftingPR")  ,where("clientId","==",+clientID));
+
+          
+          const bio_snap = await getDoc(doc(firestore,"ClientBio",clientID));
+          const mes_snap = await getDocs(mes_query);
+          const pr_snap  = await getDocs(pr_query);
+          
+          //console.log(mes_query);
+
+
+
+          
+
+            
+            // to log each doc of a query output
+            
+            mes_snap.forEach((doc)=>{
+                mes_array.push(doc.data());
+            console.log(doc.id ,"=>",doc.data());
+          })
+console.log(pr_snap);
+         
+            pr_snap.forEach((doc)=>{
+                pr_array.push(doc.data());
+            //console.log(doc.id ,"=>",doc.data());
+          })
+
+          console.log(mes_array,pr_array);
+
+          if (mes_array.length == 0)
+          {
+            document.getElementById("mes_no_data").style.visibility = " visible";
+            
+            mes_array[0] ={
+            weight : "--",
+            chest  : "--",
+            waist  : "--",
+            hip    : "--"
+          }}
+          if (pr_array.length == 0)
+          {
+             document.getElementById("pr_no_data").style.visibility = " visible";
+            pr_array[0] ={
+            squat     : "--",
+            bench     : "--",
+            deadlift  : "--" 
+          }}
+          
+          if (mes_array.length <= 1)
+          {
+            document.getElementById("mes_prev_button").disabled =true;
+            document.getElementById("mes_next_button").disabled =true;
+          }
+       
+          if (pr_array.length <= 1)
+          {
+            document.getElementById("pr_prev_button").disabled =true;
+            document.getElementById("pr_next_button").disabled =true;
+          }
+
+
+
+
+            document.getElementById("clientname").innerHTML      = bio_snap.data().name;
+            document.getElementById("package_data").innerHTML    = bio_snap.data().package;
+            document.getElementById("startdate").innerHTML       = bio_snap.data().sDate;
+            document.getElementById("enddate").innerHTML         = bio_snap.data().eDate;
+            DisplayMes();
+            DisplayPR();
+            document.getElementById("attendprogres").value       = bio_snap.data().attendance;
+            present_days = bio_snap.data().attendance; drawChart()
+            document.getElementById("coach").innerHTML           = bio_snap.data().coach;
+            document.getElementById("dietetian").innerHTML       = bio_snap.data().dietetian; 
+
+            
+
+            //hiding the login page after the data is populated in dashboard
+            document.getElementById("loginpage").style.display = "none";
+            document.getElementById("loader").style.display = "none";
+
+        }
+
+        function DisplayMes()
+        {
+            console.log(mes_data_pos);
+
+            if(mes_data_pos == mes_array.length)
+            document.getElementById("mes_next_button").disabled =true;
+            if(mes_data_pos == 1)
+            document.getElementById("mes_prev_button").disabled =true;
+            if(mes_data_pos < mes_array.length)
+            document.getElementById("mes_next_button").disabled =false;
+            if(mes_data_pos > 1)
+            document.getElementById("mes_prev_button").disabled =false;
+
+            
+            document.getElementById("weight").innerHTML          = mes_array[mes_data_pos - 1].weight;
+            document.getElementById("chest").innerHTML           = mes_array[mes_data_pos - 1].chest;
+            document.getElementById("waist").innerHTML           = mes_array[mes_data_pos - 1].waist;
+            document.getElementById("hip").innerHTML             = mes_array[mes_data_pos - 1].hip;
+            document.getElementById("mes_date").innerHTML        = "Updated Date:"+mes_array[mes_data_pos - 1].mesdate;
+
+        }
+        function DisplayPR()
+        {
+            
+            if(pr_data_pos == pr_array.length)
+            document.getElementById("pr_next_button").disabled =true;
+            if(pr_data_pos == 1)
+            document.getElementById("pr_prev_button").disabled =true;
+            if(pr_data_pos < pr_array.length)
+            document.getElementById("pr_next_button").disabled =false;
+            if(pr_data_pos > 1)
+            document.getElementById("pr_prev_button").disabled =false;
+
+            document.getElementById("benchpress").innerHTML      = pr_array[pr_data_pos - 1].bench;
+            document.getElementById("deadlift").innerHTML        = pr_array[pr_data_pos - 1].deadlift;
+            document.getElementById("squat").innerHTML           = pr_array[pr_data_pos - 1].squat;
+            document.getElementById("pr_date").innerHTML         = "Updated Date:"+ pr_array[pr_data_pos - 1].prdate;
+        }
+
+//---------------SUBMITTING MEASUREMENT & PR FORM ----------------------------
+        async function mesFormSubmit(event)
+        {event.preventDefault();
+
+            var date = new Date(); const month = date.getMonth() + 1;
+                
+                            
+                var measurement = { 
+                    clientId : +clientID,
+                    weight   : +document.getElementById("weightinput").value,
+                    chest    : +document.getElementById("chestinput").value,
+                    waist    : +document.getElementById("chestinput").value,
+                    hip      : +document.getElementById("chestinput").value,
+                    mesdate: date.getDate()+"-"+month+"-"+date.getFullYear()
+                };
+
+                console.log(measurement);
+                
+                // Getting the collection refference
+                var col_ref = collection(firestore,"Measurement");
+                //add document to the collection
+                const  doc_ref = await addDoc(col_ref, measurement).then(()=>{console.log("data added");}).catch((error)=>{console.log(error)});
+
+                pullData();
+                document.getElementById("mes_form").style.display = "none";
+                document.getElementById("form_blurbg").style.display = "none";
+
+                document.getElementById("mes_form").reset();
+
+            
+
+            
+        }
+        async function prFormSubmit(event)
+        {event.preventDefault();
+
+            var date = new Date(); const month = date.getMonth() + 1;
+                
+                            
+                var liftingpr = { 
+                    clientId : +clientID,
+                    squat    : +document.getElementById("squatinput").value,
+                    bench    : +document.getElementById("benchinput").value,
+                    deadlift : +document.getElementById("deadliftinput").value,
+                    prdate   : date.getDate()+"-"+month+"-"+date.getFullYear()
+                };
+
+                console.log(liftingpr);
+                
+                // Getting the collection refference
+                var col_ref = collection(firestore,"LiftingPR");
+                //add document to the collection
+                const  doc_ref = await addDoc(col_ref, liftingpr).then(()=>{console.log("data added");}).catch((error)=>{console.log(error)});
+
+                pullData();
+                document.getElementById("pr_form").style.display = "none";
+                document.getElementById("form_blurbg").style.display = "none";
+
+                document.getElementById("pr_form").reset();
+           
+        }
+
+
+
+        // Script to draw Pie chart with Google Script 
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        // Draw the chart and set the chart values
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+          ['Attendance', 'Days last month'],
+          ['present', present_days],
+          ['Absent', 31-present_days],
+            ]);
+        
+          // Optional; add a title and set the width and height of the chart
+          var options = {
+              title:"This Month Attendance",
+              titleTextStyle:{
+                  color:"black",
+                  fontSize: 15,
+                  bold: "true"
+              },
+              pieStartAngle: -90,
+              legend:'none',
+              tooltip: { trigger: 'none' },
+              slices: {
+                    0: { color: '#ffff00',textStyle :{color:'black',fontSize: 12,bold:"true"} },
+                    1: { color: 'transparent',textStyle :{color:'white'} }
+                        },
+              'width':300, 'height':150};
+        
+          // Display the chart inside the <div> element with id="piechart"
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data,options);
+        }
+
+       
+        </script>
+</body>
+  
+
+</html>
+

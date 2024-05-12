@@ -1,0 +1,353 @@
+:root {
+    --grey: #333232;
+    --yello: #ffff00; 
+    }
+
+
+* {box-sizing: border-box;
+    vertical-align: middle;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+background-color: var(--grey)
+}
+
+#warning{
+ display : none;
+}
+
+.nav_button {
+    
+    border-color: transparent;
+    border-bottom: 1.5px solid var(--grey);
+    color: rgb(0, 0, 0);
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 200px;
+    }
+
+    button:enabled:hover{
+        background-color: var(--yello);
+    }
+
+    
+
+.dashboard {
+    max-width: 1024px;
+    margin: 0 auto;
+    
+        margin-top: 50px;
+    color: #333;
+    
+
+    font-size: 1.2em;
+    font-weight: 700;
+
+
+
+}
+
+.dashboard > * {
+    
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+   
+}
+
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.greet {
+grid-area: header;
+border-radius: 5px 5px 120px 5px;
+
+}
+
+.clientname,h2{
+    margin-top: 0px;
+    
+}
+
+.data {
+grid-area: data;
+position: relative;
+}
+.main-nav {
+grid-area: nav;
+}
+.attend {
+grid-area: attend;
+}
+.assign {
+grid-area: assign;
+}
+
+.menu_img{
+    width: 30px; height: 30px; 
+    
+}
+
+img.profile{
+    height:100px; width:100px;
+}
+
+
+nav ul {
+display: flex;
+justify-content: space-between;
+
+}
+
+.dashboard {
+    
+display: grid;
+grid-gap: 20px;
+grid-template-areas: 
+"nav"
+"header"
+"attend"
+"assign"
+"data";
+}
+
+/* Style for Attendance Progress Bar*/
+progress[value] {
+-webkit-appearance: none;
+
+appearance: none;
+
+height: 15px;
+}
+progress::-webkit-progress-bar {
+background-color: var(--grey);
+}
+progress::-webkit-progress-value {
+background-color: var(--yello);
+}
+
+
+
+.yellow_button{
+  background-color: var(--yello);
+  border-radius: 5px;
+  padding: 2px;
+  text-align:  center;  
+}
+
+.update_button{
+background-color: var(--yello);
+border-radius: 15px;
+padding: 5px;
+text-align:  center;
+border-bottom-color: transparent;
+width: 100px;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.update_button:hover,.arrow:hover{
+transform: scale(0.965);
+}
+.assign{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* conditioning for Desktop & mobile screen sizes*/
+@media (max-width:700px){
+    #piechart{
+        display: none;
+    }  
+    .attend{
+        align-content: center;
+    }
+    .coach{
+    padding-left: 20px;
+
+}
+}
+
+@media (min-width: 700px) {
+    .dashboard {
+    grid-template-columns: 1fr 3fr 2fr;
+    grid-template-areas: 
+    "nav header  attend"
+    "nav    data assign"
+    }
+    nav ul {
+    flex-direction: column;
+    }
+    #progres_bar{
+        display: none;
+    }
+    .coach{
+    padding-left: 50px;
+    }
+}
+/*hiding measurement & PR */
+#measurement,#pr_track{
+    display: none;
+}
+
+.data_button_pannel{
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    left: 0px;
+}
+#mes_form_button,#pr_form_button,#renew_button{
+    margin-left: 10%;margin-right: 10%;
+    width: 40%;
+}
+button:disabled{
+    
+    opacity: 0.3;
+    
+}
+
+
+
+/*------------------------------------  LOGIN FORM ------------------------------------------*/
+p{
+   
+    font-weight : bold;
+    color : #f73636;
+  }
+      button:enabled:active {
+      transform: scale(0.95);
+  } 
+  h1 {
+      
+font-size: 36px;
+font-weight: bold; 
+color: var(--yello);
+margin: 0;
+text-align: center;
+}
+  #bg_img {
+              
+              position: fixed; 
+              background-color : var(--grey);
+              background-image: url("images/Wallpaper.jpg");
+              background-size: 100%;
+              filter: blur(2px);
+              top: -30%; 
+              left: 0%; 
+              width: 100%; 
+              height: 130%; 
+              
+              z-index: 2; 
+              }
+      .blurbg{
+
+          position: fixed;
+          background-color: rgba(0, 0, 0, 0.7);
+          top: 0%; left: 0%;
+          width: 100%; height: 100%;
+          z-index: 3; 
+      }
+      #form_blurbg
+      {
+        z-index: 1;
+      }
+     
+      
+      
+      #login_form,#pr_form , #mes_form {
+          position : absolute;
+          text-align:  center;
+          display: flex; flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          width : 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+
+      }  
+     #mes_form,#pr_form{
+        background-color: var(--grey);
+        height: 60%;
+        width : 60%;
+       
+        flex-wrap: wrap;
+        padding-left: 50px;
+        padding-right: 50px;
+        border-radius: 2%;
+        
+      }
+      #mes_form { flex-direction: row; }
+      #pr_form  { flex-direction: column;padding-top: 15px;}    
+      #mes_form,#pr_form> h2 { color: var(--yello);}   
+       
+      
+       #pr_form > input {width : 50%;  margin: 3%;}
+       #mes_form > input{ width : 40%;  margin: auto;    }
+
+       #closeBtn {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        cursor: pointer;
+        font-size: 2em;
+        color: #ffff00ad;
+      }
+
+      .formInput{
+          width: 25%; padding: 10px; font-size: 16px; 
+          box-sizing: border-box; border-radius: 5px; 
+          border: 1px solid #ccc;
+      }
+      .loginbutton,.arrow{
+          
+          width: 25%; padding: 10px; font-size: 18px; text-align: center; font-weight: bold;
+          background-color: var(--yello); color:#333;
+          border-radius: 5px; border: none;
+          cursor: pointer;
+      }
+      .arrow{
+        background-color: #8f8c8c;
+        width: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      #loader {
+          position: fixed;
+          background-color: rgba(0, 0, 0, 0);
+          height: 100%; width: 100%;
+          
+          
+          z-index : 4;
+          
+      }
+
+      #loader img {
+          width:130px;
+          position: fixed;
+          bottom: -1.5%;
+          
+          
+      animation: rotation 7s linear infinite;
+      
+      }
+
+      @keyframes rotation {
+      from {
+          transform: rotate(0deg);
+          left:-20%
+
+      }
+      to {
+          transform: rotate(1080deg);
+          left:120%
+      }
+      }

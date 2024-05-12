@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --grey: #808080;
+            --yello: #ffff00; 
+            }
+
+
+        * {box-sizing: border-box;
+            vertical-align: middle;
+        }
+
+        body{
+        background-color: var(--grey)
+        }
+
+        button {
+            
+            border-color: transparent;
+            border-bottom: 1.5px solid var(--grey);
+            color: rgb(0, 0, 0);
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            width: 200px;
+            }
+
+            button:hover{
+                background-color: var(--yello);
+            }
+
+            
+
+        .wrapper {
+            max-width: 1024px;
+            margin: 0 auto;
+            font: 1.2em Helvetica, arial, sans-serif;
+
+            color: #333;
+            font-family: CerebriSans-Regular, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+
+            font-size: 1.2em;
+            font-weight: 700;
+ 
+
+
+        }
+
+        .wrapper > * {
+            
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 10px;
+           
+        }
+
+        
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .greet {
+        grid-area: header;
+        border-radius: 5px 5px 120px 5px;
+        
+        }
+
+        .clientname,h2{
+            margin-top: 0px;
+        }
+
+        .data {
+        grid-area: data;
+        }
+        .main-nav {
+        grid-area: nav;
+        }
+        .attend {
+        grid-area: attend;
+        }
+        .assign {
+        grid-area: assign;
+        }
+
+        .menu_img,.arrow{
+            width: 30px; height: 30px; 
+            
+        }
+
+        img.profile{
+            height:100px; width:100px;
+        }
+       
+
+        nav ul {
+        display: flex;
+        justify-content: space-between;
+        
+        }
+
+        .wrapper {
+        display: grid;
+        grid-gap: 20px;
+        grid-template-areas: 
+        "nav"
+        "header"
+        "attend"
+        "assign"
+        "data";
+        }
+       
+        /* Style for Attendance Progress Bar*/
+        progress[value] {
+        -webkit-appearance: none;
+        
+        height: 15px;
+      }
+      progress::-webkit-progress-bar {
+        background-color: var(--grey);
+      }
+      progress::-webkit-progress-value {
+        background-color: var(--yello);
+      }
+
+      
+
+      .yellow_button{
+          background-color: var(--yello);
+          border-radius: 15px;
+          padding: 3.5px;
+          text-align:  center;  
+      }
+
+    .update_button{
+        background-color: var(--yello);
+        border-radius: 15px;
+        padding: 5px;
+        text-align:  center;
+        border-bottom-color: transparent;
+        width: 100px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    .update_button:hover,.arrow:hover{
+        transform: scale(0.965);
+    }
+      .assign{
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+      }
+
+      /* conditioning for Desktop & mobile screen sizes*/
+        @media (max-width:700px){
+            #piechart{
+                display: none;
+            }  
+            .attend{
+                align-content: center;
+            }
+            .coach{
+            padding-left: 20px;
+
+        }
+        }
+        
+        @media (min-width: 700px) {
+            .wrapper {
+            grid-template-columns: 1fr 3fr 2fr;
+            grid-template-areas: 
+            "nav header  attend"
+            "nav    data assign"
+            }
+            nav ul {
+            flex-direction: column;
+            }
+            #progres_bar{
+                display: none;
+            }
+            .coach{
+            padding-left: 50px;
+            }
+        }
+        /*hiding measurement & PR */
+        #measurement,#pr_track{
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="main-nav" style="padding-left: 0px; padding-right: 0px;">
+            <img src="images/edit_hybrid_fitness_final_logo__1__1.png" width="200px" height="150px">
+            <br><br>
+            <nav>
+            <ul>
+                <li><button onclick="Package()"><nobr><img class="menu_img" src= "images/membership_card_1.png"  ><b>  Package</b> </nobr></button></li>
+                <li><button onclick="Measure()"><nobr><img class="menu_img" src= "images/ruler_1.png"  ><b>  Measurement </b></nobr></button></li>
+                <li><button onclick="Pr_track()"><nobr><img class="menu_img" src= "images/weight_plates_1.png" ><b>Powerlifting PR</b></nobr></button></li>
+            </ul>
+            </nav>
+        </div>
+
+        <div class="greet">
+            <table>
+            <td><img src="images/user__1__1.png" class="profile"></td>
+            <td><h2 class="clientname">Hi Sukinesh..</h2> </td>
+            </table>
+        </div>
+
+        <div class="attend" style="display: inline;" >
+           
+                  <div id="piechart" style="margin-left: auto; margin-right: auto;"></div>
+                  <div id="progres_bar"  style="margin-left: auto; margin-right: auto;">This Month Attendance<br><progress  value="12" max="31"> 32% </progress></div>
+            
+        </div>
+
+        <div class="data">
+            <div id="package">
+                <h1 style="text-align: center;">Package</h1>
+                <table style="width: 100%;">
+                    <tr><td style="width:70%">Package</td><td class="yellow_button">Quarterly</td></tr>
+                    <tr><td >Start Date</td><td class="yellow_button">01 Jan 2023</td></tr>
+                    <tr><td >End Date</td><td class="yellow_button">01 Apr 2023</td></tr>
+                </table>
+                <div style="text-align: center;">
+                    <img class="arrow" src="images/Back.png">
+                    <button class="update_button" ><b>Update</b></button>
+                    <img class="arrow" src="images/next.png">
+                    
+                </div>
+            </div>
+            <div id="measurement">
+                <h1 style="text-align: center;">Measurement</h1>
+                <table style="width: 100%;">
+                    <tr><td style="width:70%">Weight</td><td class="yellow_button">110</td><td>Kg</td></tr>
+                    <tr><td>Chest</td><td class="yellow_button">110</td><td>Kg</td></tr>
+                    <tr><td>Hip</td><td class="yellow_button">80</td><td>Kg</td></tr>
+                    <tr><td>Waist</td><td class="yellow_button">140</td><td>Kg</td></tr>
+                </table>
+                <div style="text-align: center;">
+                    <img class="arrow" src="images/Back.png">
+                    <button class="update_button"><b>Update</b></button>
+                    <img class="arrow" src="images/next.png">
+                </div>
+            </div>
+            <div id="pr_track">
+                <h1 style="text-align: center;">Lifting PR</h1>
+                <table style="width: 100%;">
+                    <tr><td style="width:70%">Squat</td><td class="yellow_button">110</td><td>Kg</td></tr>
+                    <tr><td>Bench Press</td><td class="yellow_button">80</td><td>Kg</td></tr>
+                    <tr><td>Deadlift</td><td class="yellow_button">140</td><td>Kg</td></tr>
+                </table>
+                <div style="text-align: center;">
+                    <img class="arrow" src="images/Back.png">
+                    <button class="update_button"><b>Update</b></button>
+                    <img class="arrow" src="images/next.png">
+                </div>
+            </div>
+        </div> 
+
+        <div class="assign">
+            <div class="yellow_button">Coach</div>
+            <div class="coach"><img src="images/user__1__1.png" class="profile" ><br>Manikandan</div>
+            <div class="yellow_button">Dietetian</div></td>
+            <div class="coach"><img src="images/user__2__1.png" class="profile" ><br>Gayathri</div>
+        </div>
+        
+    </div>
+
+    <!--Script to draw pi chart-->
+    
+    <script type="text/javascript">
+        // Script to draw Pie chart with Google Script 
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        // Draw the chart and set the chart values
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+          ['Attendance', 'Days last month'],
+          ['present', 21],
+          ['Absent', 10],
+            ]);
+        
+          // Optional; add a title and set the width and height of the chart
+          var options = {
+              title:"This Month Attendance",
+              titleTextStyle:{
+                  color:"black",
+                  fontSize: 15,
+                  bold: "true"
+              },
+              pieStartAngle: -90,
+              legend:'none',
+              tooltip: { trigger: 'none' },
+              slices: {
+                    0: { color: '#ffff00',textStyle :{color:'black',fontSize: 12,bold:"true"} },
+                    1: { color: 'transparent',textStyle :{color:'white'} }
+                        },
+              'width':300, 'height':150};
+        
+          // Display the chart inside the <div> element with id="piechart"
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data,options);
+        }
+
+        // Functions to switch Data tabs
+        function Package()
+        {
+            document.getElementById("measurement").style.display = "none";
+            document.getElementById("pr_track").style.display = "none";
+            document.getElementById("package").style.display = "block";
+        };
+        function Measure()
+        {
+            document.getElementById("measurement").style.display = "block";
+            document.getElementById("pr_track").style.display = "none";
+            document.getElementById("package").style.display = "none";
+        };
+        function Pr_track()
+        {
+            document.getElementById("measurement").style.display = "none";
+            document.getElementById("pr_track").style.display = "block";
+            document.getElementById("package").style.display = "none";
+        };
+        </script>
+</body>
+</html>
